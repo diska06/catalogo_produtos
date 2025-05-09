@@ -1,0 +1,15 @@
+const senhaCorreta = "admin123"; // <- Altere a senha aqui
+
+const cloudName = 'dpukuosyw';
+const uploadPreset = 'catalogo_petli_preset';
+
+
+
+
+
+const RANGE_LOGO = 'Página2!A1:B'; // Planilha de Informações (Logo)
+const RANGE_PRODUCTS = 'Página1!A2:C'; // Planilha de Produtos para o catálogo
+
+const API_KEY = 'AIzaSyBdoqeEL9YJd_KpaMOKe3aSFw3q3TmSI9o';
+const SHEET_ID = '1rFBNEH41pg5zXtEDkdYXsBdARuHVQe0v2BbCSDuz5vk';
+
