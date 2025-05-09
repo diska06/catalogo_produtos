@@ -4,18 +4,26 @@
 <head>
     <meta charset="UTF-8" />
     <title>Catálogo de Produtos</title>
+    <meta name="theme-color" content="#A7DFFF" />
     <link rel="stylesheet" href="./styles/index.css">
+    <link rel="stylesheet" href="./styles/features.css">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://res.cloudinary.com/dqhc0gy9d/image/upload/v1746670682/logo_petli_yuhnec.png"
+        type="image/jpg" />
 </head>
 
 <body>
     <header>
         <div class="logo">
-            <img id="image-logo" alt="logo-loja">
+            <a href="./index.html">
+                <img id="image-logo" alt="logo-loja">
+            </a>
         </div>
 
         <button class="admin-button" onclick="window.location.href='./admin.html'">Admin</button>
@@ -23,14 +31,40 @@
 
     <main>
         <div class="catalog-title">Catálogo de Produtos</div>
+
+        <!-- Área de Busca e Filtros -->
+        <div class="search-container">
+            <input type="text" id="searchBox" class="search-box" placeholder="Buscar produtos...">
+            <button id="clearSearch" title="Limpar busca">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Loading Spinner -->
+        <div id="loadingSpinner" class="loading-spinner"></div>
+
+        <!-- Grid de Produtos -->
         <div id="product-grid"></div>
+
+        <!-- Paginação -->
+        <div class="pagination" id="pagination"></div>
     </main>
 
-    <div class="disabled" id="whatsapp-button">
-        <a class="disabled" id="whatsapp-number" target="_blank">
-            <span class="whatsapp-logo"></span>
-        </a>
+    <!-- Modal de Visualização -->
+    <div id="imageModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <img id="modalImage" class="modal-image" src="" alt="Imagem do produto">
+        </div>
     </div>
+
+    <a target="_blank" id="whatsapp-button">
+        <span class="whatsapp-logo"></span>
+    </a>
 
     <footer>
         &copy; 2025 Minha Loja. Todos os direitos reservados.

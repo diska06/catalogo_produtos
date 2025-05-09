@@ -99,9 +99,10 @@ main {
 
 #product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 280px));
     gap: 2rem;
     padding: 1rem;
+    justify-content: center;
 }
 
 .product-card {
@@ -112,6 +113,9 @@ main {
     display: flex;
     flex-direction: column;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: var(--color-text);
+    width: 280px;
+    max-width: 100%;
 }
 
 .product-card:hover {
@@ -143,9 +147,37 @@ main {
 
 .product-price {
     font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--accent-color);
+    color: var(--color-secondary);
 }
+
+.pagination-button {
+    margin: 0 3px;
+    padding: 6px 10px;
+    border: none;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-primary);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.pagination-button.active {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-weight: bold;
+}
+
+.pagination-button.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.pagination-ellipsis {
+    margin: 0 6px;
+    font-size: 1.2rem;
+    color: var(--color-text);
+}
+
 
 footer {
     text-align: center;
@@ -156,49 +188,37 @@ footer {
     margin-top: 3rem;
 }
 
-/* Estilos do botão do WhatsApp */
-.whatsapp-button {
+/* Botão flutuante do Whatsapp */
+#whatsapp-button {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
-    display: none;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
     z-index: 1000;
-    opacity: 0;
+    display: none;
+    animation: none;
+    transition: transform 0.3s ease;
 }
 
-.whatsapp-logo {
-    width: 65px;
-    height: 65px;
-    background-color: #25d366;
+#whatsapp-button img {
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-.whatsapp-logo::before {
-    content: "\f232";
-    font-family: "Font Awesome 5 Brands";
-    font-size: 30px;
-    color: #fff;
-}
+/* Animação de "pulo" */
+@keyframes jump {
 
-.whatsapp-logo:hover {
-    background-color: #128C7E;
-    transform: scale(1.1);
-}
+    0%,
+    100% {
+        transform: translateY(0);
+    }
 
-/* Animação de aparecimento inicial */
-.whatsapp-button.fade-in {
-    animation: fadeIn 0.8s ease-out forwards;
-}
-
-/* Animação de pulo */
-.whatsapp-button.jump {
-    animation: jump 0.5s ease-in-out;
+    50% {
+        transform: translateY(-15px);
+    }
 }
 
 @keyframes fadeIn {
@@ -229,12 +249,32 @@ footer {
 
 /* Responsividade */
 @media (max-width: 768px) {
+    header {
+        padding: 1rem;
+    }
+
+    .logo {
+        font-size: 1.4rem;
+        height: 50px;
+    }
+
+    .logo img {
+        max-width: 140px;
+    }
+
     .catalog-title {
-        font-size: 1.2rem;
+        font-size: 1.4rem;
+        margin-bottom: 2rem;
+    }
+
+    .catalog-title::after {
+        width: 80px;
+        height: 3px;
+        margin: 0.8rem auto;
     }
 
     main {
-        padding: 2rem 1rem;
+        padding: 1.5rem 1rem;
     }
 
     #product-grid {
@@ -244,7 +284,7 @@ footer {
     }
 
     .product-card {
-        border-radius: 10px;
+        width: 100%;
     }
 
     .product-card img {
@@ -252,35 +292,214 @@ footer {
     }
 
     .product-info {
-        padding: 1rem;
+        padding: 1.2rem;
     }
 
     .product-name {
-        font-size: 1rem;
+        font-size: 1.1rem;
+        margin-bottom: 0.6rem;
     }
 
     .product-price {
-        font-size: 1.1rem;
-    }
-
-    .whatsapp-logo {
-        width: 55px;
-        height: 55px;
-    }
-
-    .logo {
-        height: 50px;
-    }
-
-    .logo img {
-        max-width: 150px;
-        min-width: 80px;
+        font-size: 1.2rem;
     }
 }
 
-/* Ajuste para telas muito pequenas */
-@media (max-width: 360px) {
-    #product-grid {
-        grid-template-columns: repeat(1, 1fr);
+@media (max-width: 480px) {
+    header {
+        padding: 0.8rem;
     }
+
+    .logo {
+        font-size: 1.2rem;
+        height: 40px;
+    }
+
+    .logo img {
+        max-width: 120px;
+    }
+
+    .catalog-title {
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    main {
+        padding: 1rem 0.8rem;
+    }
+
+    #product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
+    }
+
+    .product-card {
+        max-width: 100%;
+    }
+
+    .product-card img {
+        height: 160px;
+    }
+
+    .product-info {
+        padding: 0.8rem;
+    }
+
+    .product-name {
+        font-size: 0.9rem;
+        margin-bottom: 0.4rem;
+    }
+
+    .product-ref {
+        font-size: 0.75rem;
+    }
+
+    .product-price {
+        font-size: 1rem;
+    }
+
+    footer {
+        padding: 1.5rem 1rem;
+        font-size: 0.8rem;
+    }
+
+    #whatsapp-button {
+        width: 50px;
+        height: 50px;
+        bottom: 15px;
+        right: 15px;
+    }
+}
+
+@media (max-width: 360px) {
+    .logo img {
+        max-width: 100px;
+    }
+
+    #product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.6rem;
+    }
+
+    .product-card img {
+        height: 140px;
+    }
+
+    .product-info {
+        padding: 0.6rem;
+    }
+
+    .product-name {
+        font-size: 0.85rem;
+    }
+
+    .product-ref {
+        font-size: 0.7rem;
+    }
+
+    .product-price {
+        font-size: 0.9rem;
+    }
+}
+
+/* Melhorias de acessibilidade e usabilidade em dispositivos touch */
+@media (hover: none) {
+    .product-card:hover {
+        transform: none;
+    }
+
+    .product-card:hover img {
+        transform: none;
+    }
+
+    .logo img:hover {
+        transform: none;
+    }
+}
+
+/* Ajustes para telas muito pequenas */
+@media (max-height: 600px) {
+    .product-card img {
+        height: 140px;
+    }
+
+    .product-info {
+        padding: 0.6rem;
+    }
+}
+
+/* Ajustes para orientação paisagem em dispositivos móveis */
+@media (max-width: 768px) and (orientation: landscape) {
+    #product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .product-card img {
+        height: 140px;
+    }
+}
+
+.form-input {
+    background: var(--color-white);
+    color: var(--color-text);
+    border: 1px solid var(--color-primary);
+}
+
+.form-button {
+    background-color: var(--color-secondary);
+    color: var(--color-white);
+    border: none;
+}
+
+.form-button:hover {
+    background-color: #ff9a6b;
+}
+
+.search-container {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    display: flex;
+    align-items: center;
+}
+
+#searchBox {
+    width: 100%;
+    padding: 12px 45px 12px 20px;
+    border: 2px solid var(--color-primary);
+    border-radius: 25px;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+    background-color: var(--color-white);
+}
+
+#searchBox:focus {
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 0 3px rgba(255, 131, 70, 0.2);
+}
+
+#clearSearch {
+    position: absolute;
+    right: 15px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text);
+    opacity: 0.6;
+    transition: all 0.3s ease;
+}
+
+#clearSearch:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+#clearSearch svg {
+    width: 20px;
+    height: 20px;
 }
